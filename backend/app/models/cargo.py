@@ -3,16 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
 from app.models.base import Base
 from app.models.order import StatusEnum
-import enum
-
-class SizeEnum(enum.Enum):
-    SMALL = "Small"
-    MEDIUM = "Medium"
-    LARGE = "Large"
-
-class PositionEnum(enum.Enum):
-    EARTH = "Earth"
-    ORBIT = "Orbit"
+from app.models.enums import SizeEnum, PositionEnum
 
 class Cargo(Base):
     __tablename__ = "cargos"

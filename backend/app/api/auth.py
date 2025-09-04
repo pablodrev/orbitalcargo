@@ -5,7 +5,7 @@ from app.schemas.user import UserLoginSchema, UserRegisterSchema
 from app.database import database
 from app.services.user_service import UserService
 
-router = APIRouter()
+router = APIRouter(tags=['auth'])
 
 @router.post("/login")
 def login(user_data: UserLoginSchema, db: Session = Depends(database.get_db)):
