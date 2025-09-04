@@ -1,6 +1,6 @@
 import {StrictMode, useEffect} from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
+import '../src/styles/global.scss';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomePage } from "./pages/home";
 import { Layout } from "./shared/ui/layout";
