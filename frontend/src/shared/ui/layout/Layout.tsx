@@ -1,13 +1,19 @@
 import {Outlet} from "react-router";
+import Header from "../header/Header.tsx";
+import Footer from "../footer/Footer.tsx";
+import './Layout.scss';
 
 export const Layout = () => {
   return (
-    <div className="">
+    <div className="default-layout">
 
-      <main className="">
+      <Header />
+
+      <main className="default-layout__main">
         <Outlet/>
       </main>
 
+      <Footer />
     </div>
   )
 }

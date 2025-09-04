@@ -1,11 +1,12 @@
 .footer {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #373737; /* Lighter gray background */
   color: #FFFFFF; /* White text */
   padding: 1rem;
   text-align: center;
-  position: relative;
-  bottom: 0;
-  width: 100%;
   font-family: 'Arial', 'Noto Sans', sans-serif;
 }
 
