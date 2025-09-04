@@ -11,6 +11,7 @@ import {initAuth} from "./features/auth/model/authSlice.ts";
 import {useAppDispatch} from "./hooks/dispatch.ts";
 import {ProtectedRoute} from "./shared/ui/protected-route/ProtectedRoute.tsx";
 import {TestPage} from "./pages/test";
+import {CreateOrderPage} from "./pages/create-order";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             element: <TestPage />
           }
         ]
+      },
+      {
+        path: 'createOrder',
+        element: <CreateOrderPage />,
       }
     ],
   }
