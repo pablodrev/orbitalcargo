@@ -1,25 +1,15 @@
 from pydantic import BaseModel
 from typing import Optional
-from enum import Enum
 from decimal import Decimal
+from app.models.enums import SizeEnum
 
-class SlotSize(str, Enum):
-    S = "S"
-    M = "M"
-    L = "L"
-
-class SlotBase(BaseModel):
-    code: str
-    size: Optional[SlotSize]
-    max_weight_kg: Decimal
-    free: Optional[bool] = True
-
-class SlotCreate(SlotBase):
+class SlotCreateSchema(BaseModel):
+    size: SizeEnum
     lift_id: int
+    free: bool
 
-class Slot(SlotBase):
+class SlotSchema(SlotCreateSchema):
     id: int
-    lift_id: int
 
     class Config:
         from_attributes = True

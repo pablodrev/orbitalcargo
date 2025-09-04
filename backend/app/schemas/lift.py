@@ -1,17 +1,21 @@
 from pydantic import BaseModel
+from typing import List
 from typing import Optional
 from datetime import datetime
+from app.schemas.slot import SlotSchema
 
-class LiftBase(BaseModel):
+
+class LiftSchema(BaseModel):
+    id: int
     name: str
     max_payload_kg: float
-
-class LiftCreate(LiftBase):
-    pass
-
-class Lift(LiftBase):
-    id: int
     created_at: datetime
+    slots: List[SlotSchema]
 
     class Config:
         from_attributes = True
+
+class LiftCreateSchema(BaseModel):
+    name: str
+    max_payload_kg: float
+    

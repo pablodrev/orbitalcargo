@@ -1,19 +1,20 @@
 # app/models/lift.py
-from sqlalchemy import Column, Integer, Text, Numeric, DateTime, func
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Text, Numeric, DateTime
+from sqlalchemy.sql import func
+from datetime import datetime
 
 from app.models.base import Base
 
 class Lift(Base):
     __tablename__ = "lift"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(Text, unique=True, nullable=False)
-    max_payload_kg = Column(Numeric(10, 2), nullable=False)  # precision: adjust if нужно
-    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(Text, unique=True, nullable=False)
+    max_payload_kg: Mapped[float] = mapped_column(Numeric(10, 2), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
-    # relationship -> список слотов
-    slots = relationship("Slot", back_populates="lift", cascade="all, delete-orphan")
+    slots: Mapped[list["Slot"]] = relationship("Slot", back_populates="lift", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<Lift id={self.id} name={self.name}>"
