@@ -1,6 +1,153 @@
+$primary-bg: #272727;
+$primary-text: #FFFFFF;
+$secondary-text: #373737;
+$accent: #FF8F00;
+
 .dashboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  background-color: $primary-bg;
+  color: $primary-text;
+  padding: 2rem;
+  min-height: 80vh;
+  font-family: 'Arial', 'Noto Sans', sans-serif;
+
+  .dashboardTitle {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .dashboardGrid {
+    display: grid;
+    grid-template-areas:
+      "animation contents"
+      "control logs";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    min-height: 60vh;
+    margin-bottom: 1rem;
+  }
+
+  .animationSpace {
+    grid-area: animation;
+    background-color: rgba($secondary-text, 0.3);
+    border: 1px dashed $primary-text;
+    min-height: 200px;
+  }
+
+  .contentsInfo {
+    grid-area: contents;
+    background-color: rgba($secondary-text, 0.3);
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid $accent;
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+  }
+
+  .controlPanel {
+    grid-area: control;
+    background-color: rgba($secondary-text, 0.3);
+    padding: 1rem;
+    border: 1px solid $accent;
+
+    .buttonRow {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      button.btn { // Target the Button component's base class
+        padding: 0.5rem 1rem;
+        background-color: $accent;
+        color: $primary-text;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+
+        &:hover:not(:disabled) {
+          background-color: $secondary-text;
+        }
+
+        /* Visual cue for buttons that should be disabled */
+        &:nth-child(1):nth-last-child(2),
+        &:nth-child(2):nth-last-child(2) { // Targets "Отправить лифт наверх/вниз" and "Остановить лифт"
+          opacity: 0.5;
+          cursor: not-allowed;
+          pointer-events: none; // Prevents clicks
+        }
+      }
+    }
+  }
+
+  .textLogs {
+    grid-area: logs;
+    background-color: rgba($secondary-text, 0.3);
+    padding: 1rem;
+    border: 1px solid $accent;
+    font-size: 1rem;
+    line-height: 1.4;
+    min-width: 300px; // Wide enough for "Все системы охлаждения работают нормально"
+    overflow-y: auto;
+    max-height: 200px;
+
+    p {
+      margin: 0;
+      color: $secondary-text;
+    }
+  }
+
+  .backButton {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: $accent;
+    color: $primary-text;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $secondary-text;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+
+    .dashboardTitle {
+      font-size: 1.5rem;
+    }
+
+    .dashboardGrid {
+      grid-template-areas:
+        "animation"
+        "contents"
+        "control"
+        "logs";
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .animationSpace,
+    .contentsInfo,
+    .controlPanel,
+    .textLogs {
+      min-height: 150px;
+    }
+
+    .controlPanel .buttonRow {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
 }
