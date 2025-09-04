@@ -11,6 +11,7 @@ class CargoResponseSchema(BaseModel):
     name: str
     size: SizeEnum
     weight: float
-    order_id: int | None = None
+    # order_id: int | None = None
+    status: str | None = None
 
     model_config = ConfigDict(from_attributes=True)
