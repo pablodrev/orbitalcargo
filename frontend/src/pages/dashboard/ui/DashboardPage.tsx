@@ -14,15 +14,15 @@ export const DashboardPage = () => {
     <div className="dashboard">
       <h2 className="dashboardTitle">Состояние подъемной системы</h2>
       <div className="dashboardGrid">
-        {/* Top Left - Future Animation Space */}
+        {/* тут будет анимация когда-нибудь */}
         <div className="animationSpace"></div>
 
-        {/* Top Right - Elevator Contents Info */}
+        {/* миссии */}
         <div className="contentsInfo">
           <p>Weight: 500 kg</p>
         </div>
 
-        {/* Bottom Left - Control Panel */}
+        {/* панель управления */}
         <div className="controlPanel">
           <div className="buttonRow">
             <Button
@@ -54,7 +54,7 @@ export const DashboardPage = () => {
           </div>
         </div>
 
-        {/* Bottom Right - Text Logs */}
+        {/* логи */}
         <div className="textLogs">
           {logs.map((log, index) => (
             <p key={index}>{log}</p>
