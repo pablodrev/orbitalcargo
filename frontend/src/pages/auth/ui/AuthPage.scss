@@ -1,18 +1,20 @@
 .auth-page-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 800px;
+  min-width: 400px;
   height: fit-content;
-  padding: 20px;
+  padding: 30px;
   margin: 0 auto;
   background-color: var(--color-gray-01);
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid var(--color-gray-02);
+  gap: 15px;
 
   &__header {
-    font-family: Ubuntu-Medium sans-serif;
+    text-align: center;
+    font-family: 'Ubuntu-Medium', sans-serif;
     color: var(--color-white);
+    font-size: 22px;
+
   }
 }

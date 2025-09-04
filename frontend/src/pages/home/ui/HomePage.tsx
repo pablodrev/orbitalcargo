@@ -1,11 +1,11 @@
-export const HomePage = () => {
 
-    //const [value, setValue] = useState("smth");
-    //для выпадающего списка
+import {CreateOrderPage} from "../../create-order";
+
+export const HomePage = () => {
 
     return (
         <div>
-            <h1>Главная страница</h1>
+            <CreateOrderPage />
         </div>
     );
 };

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from app.core.security import security
 from app.schemas.user import UserLoginSchema, UserRegisterSchema
@@ -13,7 +14,7 @@ def login(user_data: UserLoginSchema, db: Session = Depends(database.get_db)):
     if user:
         token = security.create_access_token(uid=str(user.id), data={"role": user.role.name})
         return {"access_token": token, "role": user.role.name}
-    return {"message": "Invalid username or password"}, 401
+    return JSONResponse(status_code=401, content={"message": "Invalid credentials"})
 
 @router.post("/register")
 def register(user_data: UserRegisterSchema, db: Session = Depends(database.get_db)):

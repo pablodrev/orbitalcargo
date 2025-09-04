@@ -1,7 +1,7 @@
 import axios, {type AxiosInstance} from "axios";
 
 
-export const API_URL = ''
+export const API_URL = 'http://5.129.243.99:8000'
 const api: AxiosInstance = axios.create({
   baseURL: API_URL,
 });
@@ -22,7 +22,7 @@ api.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       localStorage.removeItem('token');
-      window.location.href = '/login';
+      window.location.href = '/auth';
     }
     return Promise.reject(error);
   }
