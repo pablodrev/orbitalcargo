@@ -4,7 +4,7 @@ import { Button } from '../../../shared/ui/button';
 import { OrderDetails } from '../../order-details'; // Adjust path as needed
 import { useAppSelector } from '../../../hooks/rootState';
 import { useAppDispatch } from '../../../hooks/dispatch';
-import { fetchOrders} from "../../../features/orders/model/getOrdersSlice.ts";
+import { fetchOrders } from '../../../features/orders/model/getOrdersSlice';
 import './OrdersPage.scss';
 
 interface Order {
@@ -13,6 +13,7 @@ interface Order {
     sender: string;
     phoneNumber: string;
     status: string;
+    cargos: { id: number; name: string; size: "Small" | "Medium" | "Large"; weight: number; order_id: number }[];
 }
 
 export const OrdersPage: React.FC = () => {
@@ -26,7 +27,10 @@ export const OrdersPage: React.FC = () => {
 
     if (selectedOrder) {
         return (
-            <OrderDetails onBack={() => setSelectedOrder(null)} />
+            <OrderDetails
+                order={selectedOrder}
+                onBack={() => setSelectedOrder(null)}
+            />
         );
     }
 
