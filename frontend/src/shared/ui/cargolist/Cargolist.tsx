@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "../input";
 import { Button } from "../button";
 import "./cargolist.css";
@@ -10,24 +10,18 @@ interface Cargo {
 }
 
 export const CargoList: React.FC = () => {
-    const nameRef = useRef<HTMLInputElement>(null);
-    const weightRef = useRef<HTMLInputElement>(null);
-    const sizeRef = useRef<HTMLInputElement>(null);
-
+    const [name, setName] = useState("");
+    const [weight, setWeight] = useState("");
+    const [size, setSize] = useState("");
     const [cargos, setCargos] = useState<Cargo[]>([]);
 
     const addCargo = () => {
-        const name = nameRef.current?.value.trim() || "";
-        const weight = weightRef.current?.value.trim() || "";
-        const size = sizeRef.current?.value.trim() || "";
-
-        if (!name || !weight || !size) return;
+        if (!name.trim() || !weight.trim() || !size.trim()) return;
 
         setCargos((prev) => [...prev, { name, weight, size }]);
-
-        if (nameRef.current) nameRef.current.value = "";
-        if (weightRef.current) weightRef.current.value = "";
-        if (sizeRef.current) sizeRef.current.value = "";
+        setName("");
+        setWeight("");
+        setSize("");
     };
 
     const removeCargo = (index: number) => {
@@ -38,13 +32,13 @@ export const CargoList: React.FC = () => {
         <div className="cargo-wrapper">
             <div className="cargo-header">
                 <div className="cargo-input">
-                    <Input label="Название" ref={nameRef} />
+                    <Input label="Название" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className="cargo-input">
-                    <Input label="Вес" ref={weightRef} />
+                    <Input label="Вес" value={weight} onChange={(e) => setWeight(e.target.value)} />
                 </div>
                 <div className="cargo-input">
-                    <Input label="Размер" ref={sizeRef} />
+                    <Input label="Размер" value={size} onChange={(e) => setSize(e.target.value)} />
                 </div>
                 <Button icon={<span>＋</span>} onClick={addCargo} />
             </div>
