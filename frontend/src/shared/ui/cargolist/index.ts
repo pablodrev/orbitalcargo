@@ -1,0 +1,1 @@
+export { CargoList } from "./Cargolist.tsx";
