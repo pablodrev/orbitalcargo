@@ -12,20 +12,20 @@ interface AuthSlice {
   token: string | null;
   isAuth: boolean;
   loading: boolean;
-};
+}
 
 const initialState: AuthSlice = {
   user: null,
   token: null,
   isAuth: false,
   loading: false,
-};
+}
 
 export const login = createAsyncThunk(
   'auth/login',
   async ({ username, password }: { username: string; password: string }, thunkAPI) => {
     try {
-      const response = await api.post<{ token: string; user: User }>('/auth/login', {
+      const response = await api.post<{ token: string; user: User }>('/api/auth/login', {
         username,
         password,
       });

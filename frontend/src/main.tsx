@@ -12,6 +12,7 @@ import {useAppDispatch} from "./hooks/dispatch.ts";
 import {ProtectedRoute} from "./shared/ui/protected-route/ProtectedRoute.tsx";
 import {TestPage} from "./pages/test";
 import {CreateOrderPage} from "./pages/create-order";
+import { OrdersPage } from './pages/orders/index.ts';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: 'createOrder',
         element: <CreateOrderPage />,
+      },
+      {
+        path: 'orders',
+        element: <OrdersPage/>,
       }
     ],
   }
