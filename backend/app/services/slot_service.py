@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models.slot import Slot
 from app.schemas.slot import SlotCreateSchema
-from app.models.enums import SizeEnum
 
 class SlotService:
 
@@ -28,3 +27,13 @@ class SlotService:
         db.refresh(new_slot)
 
         return new_slot
+    
+    @staticmethod
+    def assign_cargo(db: Session, slot_id: int, cargo_id: int):
+        slot = db.query(Slot).filter(Slot.id == slot_id).first()
+        if slot:
+            slot.cargo_id = cargo_id
+            db.commit()
+            db.refresh(slot)
+            return slot
+        return None

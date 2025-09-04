@@ -15,6 +15,3 @@ class Lift(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     slots: Mapped[list["Slot"]] = relationship("Slot", back_populates="lift", cascade="all, delete-orphan")
-
-    def __repr__(self) -> str:
-        return f"<Lift id={self.id} name={self.name}>"

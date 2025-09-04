@@ -1,15 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.database.database import get_db
-from app.models.slot import Slot
 from app.schemas.slot import SlotSchema, SlotCreateSchema
 from app.services.slot_service import SlotService
 
 router = APIRouter(tags=["Slot"])
-
-# --- Slot Endpoints ---
-
-
 
 @router.get("/", response_model=list[SlotSchema])
 def list_slots(db: Session = Depends(get_db)):
@@ -30,3 +25,10 @@ def create_slot(slot_data: SlotCreateSchema, db: Session = Depends(get_db)):
     if slot:
         return {"message": "Slot created successfully", "slot_id": slot.id}
     return {"message": "Slot creation failed"}, 400
+
+@router.patch("/{slot_id}/assign-cargo/{cargo_id}")
+def assign_cargo_to_slot(slot_id: int, cargo_id: int, db: Session = Depends(get_db)):
+    slot = SlotService.assign_cargo(db, slot_id, cargo_id)
+    if slot:
+        return {"message": "Cargo assigned to slot successfully"}
+    return {"message": "Failed to assign cargo to slot"}, 400
