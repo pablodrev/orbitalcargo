@@ -85,4 +85,4 @@ docker compose down
 ![alt text](images\image_2025-09-04_17-53-33.png)
 Иконки
 
-![alt text](images\image_2025-09-04_17-54-59.png)
+![alt text](\images\image_2025-09-04_17-54-59.png)
