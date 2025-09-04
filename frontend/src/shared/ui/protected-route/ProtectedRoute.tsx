@@ -7,8 +7,7 @@ interface RoleProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ allowedRoles }: RoleProtectedRouteProps) => {
-  const { isAuth, loading, user } = useAppSelector((state) => state.auth);
-  const role = user?.role;
+  const { isAuth, loading, role } = useAppSelector((state) => state.auth);
 
   if (loading) {
     return <p>Загрузка...</p>; // можно сделать спиннер
@@ -19,7 +18,7 @@ export const ProtectedRoute = ({ allowedRoles }: RoleProtectedRouteProps) => {
   }
 
   if (!role || !allowedRoles.includes(role)) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/auth" replace />;
   }
 
   return <Outlet />;

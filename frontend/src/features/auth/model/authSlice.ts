@@ -1,22 +1,16 @@
 import { createSlice, createAsyncThunk, type PayloadAction} from "@reduxjs/toolkit";
 import api from '../../../shared/api/axios';
 
-interface User {
-  id: string;
-  username: string;
-  role: string;
-}
-
 interface AuthSlice {
-  user: User | null;
   token: string | null;
+  role: string | null;
   isAuth: boolean;
   loading: boolean;
 }
 
 const initialState: AuthSlice = {
-  user: null,
   token: null,
+  role: null,
   isAuth: false,
   loading: false,
 }
@@ -25,38 +19,18 @@ export const login = createAsyncThunk(
   'auth/login',
   async ({ username, password }: { username: string; password: string }, thunkAPI) => {
     try {
-      const response = await api.post<{ token: string; user: User }>('/api/auth/login', {
+      const response = await api.post<{ access_token: string; role: string }>('/api/auth/login', {
         username,
         password,
       });
 
-      const { token, user } = response.data;
+      const { access_token, role } = response.data;
 
-      localStorage.setItem('token', token);
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      localStorage.setItem('token', access_token);
 
-      return { token, user };
+      return { access_token, role };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const initAuth = createAsyncThunk(
-  'auth/initAuth',
-  async (_, thunkAPI) => {
-    const token = localStorage.getItem('token');
-    if (!token) return thunkAPI.rejectWithValue(null);
-
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-    try {
-      const response = await api.get<User>('auth/me');
-      return { token, user: response.data };
-    } catch (err) {
-      localStorage.removeItem('token');
-      delete api.defaults.headers.common['Authorization'];
-      return thunkAPI.rejectWithValue(err);
     }
   }
 );
@@ -66,8 +40,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout(state) {
-      state.user = null;
       state.token = null;
+      state.role = null;
       state.isAuth = false;
       localStorage.removeItem('token');
       delete api.defaults.headers.common['Authorization'];
@@ -78,26 +52,16 @@ const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.loading = true;
       })
-      .addCase(login.fulfilled, (state, action: PayloadAction<{ token: string, user: User }>) => {
+      .addCase(login.fulfilled, (state, action: PayloadAction<{ access_token: string, role: string }>) => {
         state.loading = false;
         state.isAuth = true;
-        state.token = action.payload.token;
-        state.user = action.payload.user;
+        state.token = action.payload.access_token;
+        state.role = action.payload.role;
       })
       .addCase(login.rejected, (state) => {
         state.loading = false;
         state.isAuth = false;
       })
-      .addCase(initAuth.fulfilled, (state, action: PayloadAction<{ token: string, user: User }>) => {
-        state.isAuth = true;
-        state.token = action.payload.token;
-        state.user = action.payload.user;
-      })
-      .addCase(initAuth.rejected, (state) => {
-        state.isAuth = false;
-        state.token = null;
-        state.user = null;
-      });
   },
 });
 
