@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.schemas.order import OrderCreateSchema
+from app.schemas.order import OrderCreateSchema, OrderResponseSchema
 from app.models.order import Order
 from app.models.cargo import Cargo
 from app.models.enums import DirectionEnum, StatusEnum, PositionEnum
@@ -29,3 +29,8 @@ class OrderService:
 
         return new_order
     
+
+    @staticmethod
+    def list_orders(db: Session):
+        orders = db.query(Order).all()
+        return orders
