@@ -3,15 +3,16 @@ from authx import AuthXConfig
 from datetime import timedelta
 
 
-class Settings(BaseSettings):
-    db_host: str = "localhost"
-    db_port: int = 5432
-    db_user: str = "postgres"
-    db_password: str = "password"
-    db_name: str = "hackit"
 
-    SECRET_KEY: str = "secretkey"
-    JWT_ACCESS_TOKEN_EXPIRES: int = 30  
+class Settings(BaseSettings):
+    db_host: str
+    db_port: int
+    db_user: str
+    db_password: str
+    db_name: str
+
+    SECRET_KEY: str
+    JWT_ACCESS_TOKEN_EXPIRES: int = 30
 
     class Config:
         env_file = ".env"
