@@ -1,7 +1,11 @@
 export const HomePage = () => {
-  return (
-    <div>
-      <h1>Главная страница</h1>
-    </div>
-  );
+
+    //const [value, setValue] = useState("smth");
+    //для выпадающего списка
+
+    return (
+        <div>
+            <h1>Главная страница</h1>
+        </div>
+    );
 };

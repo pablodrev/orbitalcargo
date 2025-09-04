@@ -1,0 +1,26 @@
+.footer {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #373737; /* Lighter gray background */
+  color: #FFFFFF; /* White text */
+  padding: 1rem;
+  text-align: center;
+  font-family: 'Arial', 'Noto Sans', sans-serif;
+}
+
+.text {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.link {
+  color: #FF8F00;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #272727;
+  text-decoration: underline;
+}

@@ -1,19 +1,19 @@
 import {Outlet} from "react-router";
+import Header from "../header/Header.tsx";
+import Footer from "../footer/Footer.tsx";
+import './Layout.scss';
 
 export const Layout = () => {
   return (
-    <div className="">
-      <header className="">
-        <h1 className="">Мое приложение</h1>
-      </header>
+    <div className="default-layout">
 
-      <main className="">
+      <Header />
+
+      <main className="default-layout__main">
         <Outlet/>
       </main>
 
-      <footer className="">
-        <p>© {new Date().getFullYear()} Все права защищены</p>
-      </footer>
+      <Footer />
     </div>
   )
 }
