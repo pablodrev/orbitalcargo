@@ -6,7 +6,6 @@ import React, {useEffect, useState} from "react";
 import {useAppSelector} from "../../../hooks/rootState.ts";
 import { login } from '../../../features/auth/model/authSlice.ts';
 import {useNavigate} from "react-router";
-
 export const AuthPage = () => {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
