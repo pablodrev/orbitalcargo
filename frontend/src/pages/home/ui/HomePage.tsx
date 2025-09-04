@@ -1,10 +1,10 @@
-import {CreateOrderPage} from "../../create-order";
+import {OrdersPage} from "../../orders";
 
 export const HomePage = () => {
 
     return (
         <div>
-            <CreateOrderPage />
+            <OrdersPage />
         </div>
     );
 };

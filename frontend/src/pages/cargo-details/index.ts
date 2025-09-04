@@ -1,0 +1,1 @@
+export { CargoDetails } from "./ui/CargoDetails";

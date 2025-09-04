@@ -1,0 +1,76 @@
+.cargo-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background: #272727;
+  color: #ffffff;
+  border-radius: 12px;
+}
+
+.cargo-details h2 {
+  color: #ff8f00;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.cargo-details-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cargo-details-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #ff8f00;
+}
+
+.cargo-details-form input,
+.cargo-details-form select {
+  padding: 8px 10px;
+  background: #373737;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.cargo-details-form input:focus,
+.cargo-details-form select:focus {
+  outline: 1px solid #ff8f00;
+}
+
+.cargo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  color: #bbbbbb;
+  margin-top: 10px;
+}
+
+.cargo-details-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cargo-details-actions button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cargo-details-actions button:first-child {
+  background: #373737;
+  color: #ffffff;
+}
+
+.cargo-details-actions button:last-child {
+  background: #ff8f00;
+  color: #272727;
+}
