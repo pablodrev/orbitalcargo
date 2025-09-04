@@ -1,27 +1,42 @@
-import './dropmenu.css'
+import "./dropmenu.css";
 
-interface DropmenuProps {
+interface DropmenuProps<T extends string> {
     label: string;
-    options: string[];
-    value: string;
-    onChange: (value: string) => void;
+    options: readonly T[];
+    value: T | "";
+    onChange: (value: T | "") => void;
+    placeholder?: string;
+    disabled?: boolean;
 }
 
-export const Dropmenu: React.FC<DropmenuProps> = ({ label, options, value, onChange }) => {
+export function Dropmenu<T extends string>({
+                                               label,
+                                               options,
+                                               value,
+                                               onChange,
+                                               placeholder,
+                                               disabled = false,
+                                           }: DropmenuProps<T>) {
     return (
         <div className="dropmenu-wrapper">
             <label className="dropmenu-label">{label}</label>
             <select
                 className="dropmenu-field"
                 value={value}
-                onChange={(e) => onChange(e.target.value)}
+                onChange={(e) => onChange(e.target.value as T | "")}
+                disabled={disabled}
             >
-                {options.map((opt, idx) => (
-                    <option key={idx} value={opt}>
+                {placeholder && (
+                    <option value="" disabled>
+                        {placeholder}
+                    </option>
+                )}
+                {options.map((opt) => (
+                    <option key={opt} value={opt}>
                         {opt}
                     </option>
                 ))}
             </select>
         </div>
     );
-};
+}
