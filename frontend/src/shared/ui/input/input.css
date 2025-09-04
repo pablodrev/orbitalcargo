@@ -2,25 +2,23 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 12px 6px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
-    margin-top: 10px;
-    align-items: center;
 }
 
 .input-label {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 500;
-    margin-bottom: 8px;
-    color: #FF8F00;
+    margin-bottom: 3px;
+    color: var(--color-01);
+    font-family: 'Ubuntu-Medium', sans-serif;
 }
 
 .input-field {
     width: 100%;
     padding: 12px 14px;
-    font-size: 24px;
+    font-size: 16px;
     color: #FFFFFF;
+    font-family: 'Ubuntu-Regular', sans-serif;
     background-color: #373737;
     border: 1px solid #373737;
     outline: none;
@@ -29,5 +27,5 @@
 
 .input-field:focus {
     border-color: #FF8F00;
-    box-shadow: 0 0 0 2px rgba(255, 143, 0, 0.3);
+    box-shadow: 0 0 0 1px rgba(255, 143, 0, 0.3);
 }

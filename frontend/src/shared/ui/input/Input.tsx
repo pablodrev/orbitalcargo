@@ -1,19 +1,23 @@
-import React, { forwardRef } from "react";
 import "./input.css";
+import React from "react";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    label: string;
+interface InputProps {
+  label: string;
+  type?: string;
+  value?: string;
+  onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ label, type = "text", ...props }, ref) => {
-        return (
-            <div className="input-wrapper">
-                <label className="input-label">{label}</label>
-                <input ref={ref} type={type} className="input-field" {...props} />
-            </div>
-        );
-    }
-);
-
-Input.displayName = "Input"; // чтобы не было warning в React DevTools
+export const Input: React.FC<InputProps> = ({ label, type = "text", value, onChange }) => {
+  return (
+    <div className="input-wrapper">
+      <label className="input-label">{label}</label>
+      <input
+        className="input-field"
+        type={type}
+        value={value}
+        onChange={onChange}
+      />
+    </div>
+  );
+};
