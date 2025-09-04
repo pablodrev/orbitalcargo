@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import "./input.css";
 import React from "react";
 
@@ -8,7 +9,6 @@ interface InputProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     disabled?: boolean; // Add disabled prop
 }
-
 export const Input: React.FC<InputProps> = ({ label, type = "text", value, onChange, disabled = false }) => {
     return (
         <div className="input-wrapper">
