@@ -4,3 +4,24 @@
     align-items: center;
     justify-content: center;
 }
+
+h2 {
+    color: #FF8F00;
+    margin-bottom: 16px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.cargo-section {
+    margin-top: 16px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
