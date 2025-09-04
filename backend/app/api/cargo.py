@@ -8,5 +8,5 @@ router = APIRouter(tags=['cargo'])
 
 @router.get("/", response_model=list[CargoResponseSchema])
 def get_cargos(db: Session = Depends(database.get_db)):
-    cargos = CargoService.get_cargos(db)
+    cargos = CargoService.list_cargos(db)
     return cargos
