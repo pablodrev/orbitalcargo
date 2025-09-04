@@ -1,6 +1,6 @@
 import {StrictMode, useEffect} from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
+import '../src/styles/global.scss';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomePage } from "./pages/home";
 import { Layout } from "./shared/ui/layout";
@@ -11,6 +11,7 @@ import {initAuth} from "./features/auth/model/authSlice.ts";
 import {useAppDispatch} from "./hooks/dispatch.ts";
 import {ProtectedRoute} from "./shared/ui/protected-route/ProtectedRoute.tsx";
 import {TestPage} from "./pages/test";
+import {CreateOrderPage} from "./pages/create-order";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             element: <TestPage />
           }
         ]
+      },
+      {
+        path: 'createOrder',
+        element: <CreateOrderPage />,
       }
     ],
   }
