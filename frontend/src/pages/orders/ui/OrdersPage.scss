@@ -1,6 +1,102 @@
-.orders {
+$primary-bg: #272727;
+$primary-text: #FFFFFF;
+$secondary-text: #373737;
+$accent: #FF8F00;
+
+.ordersContainer {
+  background-color: $primary-bg;
+  color: $primary-text;
+  padding: 2rem;
+  min-height: 80vh;
+  font-family: 'Arial', 'Noto Sans', sans-serif;
+
+  .title {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .orderList {
+    list-style: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .orderItem {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; // Distributes items evenly
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background-color: rgba(55, 55, 55, 0.8); // Slightly lighter for readability
+    border-radius: 4px;
+
+    &:hover {
+      background-color: rgba(55, 55, 55, 0.9);
+    }
+
+    // Split the text into spans for distribution
+    span {
+      margin-right: 1rem; // Space between properties
+      &:last-child {
+        margin-right: 0; // No extra space before the button
+      }
+    }
+  }
+
+  .moreButton {
+    padding: 0.25rem 0.75rem;
+    background-color: $accent;
+    color: $primary-text;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+
+    &:hover {
+      background-color: $secondary-text;
+    }
+  }
+
+  .backButton {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: $accent;
+    color: $primary-text;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $secondary-text;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+
+    .title {
+      font-size: 1.5rem;
+    }
+
+    .orderItem {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.5rem;
+
+      span {
+        display: block; // Stack vertically on small screens
+        margin-bottom: 0.5rem;
+        margin-right: 0;
+      }
+
+      .moreButton {
+        margin-top: 0.5rem;
+      }
+    }
+  }
 }
