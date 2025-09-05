@@ -1,28 +1,33 @@
 import React from 'react';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; // Заменяем Link на NavLink
 import orbitlogo from '../../../assets/icons/orbitlogo.png';
 import { useAppSelector } from '../../../hooks/rootState.ts';
-import {Button} from "../button";
-import {logout} from "../../../features/auth/model/authSlice.ts";
-import {useAppDispatch} from "../../../hooks/dispatch.ts";
-import {useNavigate} from "react-router";
+import { Button } from '../button';
+import { logout } from '../../../features/auth/model/authSlice.ts';
+import { useAppDispatch } from '../../../hooks/dispatch.ts';
+import { useNavigate } from 'react-router';
 
 const Header: React.FC = () => {
   const { isAuth, role } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/auth')
-  }
+    navigate('/auth');
+  };
 
   const renderNavLinks = () => {
     if (!isAuth || !role) {
       return (
         <>
-          <Link to="/auth" className="nav-link">Войти</Link>
-          <Link to="/" className="nav-link">Главная</Link>
+          <NavLink to="/auth" className="nav-link">
+            Войти
+          </NavLink>
+          <NavLink to="/" className="nav-link">
+            Главная
+          </NavLink>
         </>
       );
     }
@@ -31,22 +36,34 @@ const Header: React.FC = () => {
       case 'operator':
         return (
           <>
-            <Link to="/operator/dashboard" className="nav-link">Админ-панель</Link>
+            <NavLink to="/operator/dashboard" className="nav-link">
+              Админ-панель
+            </NavLink>
           </>
         );
       case 'manager':
         return (
           <>
-            <Link to="/manager/createOrder" className="nav-link">Создать заявку</Link>
-            <Link to="/manager/orders" className="nav-link">Заявки</Link>
-            <Link to="/manager/assignCargo" className="nav-link">Заполнить лифт</Link>
+            <NavLink to="/manager/createOrder" className="nav-link">
+              Создать заявку
+            </NavLink>
+            <NavLink to="/manager/orders" className="nav-link">
+              Заявки
+            </NavLink>
+            <NavLink to="/manager/assignCargo" className="nav-link">
+              Заполнить лифт
+            </NavLink>
           </>
         );
       default:
         return (
           <>
-            <Link to="/auth" className="nav-link">Войти</Link>
-            <Link to="/" className="nav-link">Главная</Link>
+            <NavLink to="/auth" className="nav-link">
+              Войти
+            </NavLink>
+            <NavLink to="/" className="nav-link">
+              Главная
+            </NavLink>
           </>
         );
     }
@@ -57,12 +74,8 @@ const Header: React.FC = () => {
       <div className="logo">
         <img src={orbitlogo} alt="orbitlogo" />
       </div>
-      <nav className="nav">
-        {renderNavLinks()}
-      </nav>
-      { isAuth && (
-        <Button text={'Выход'} onClick={handleLogout} />
-      )}
+      <nav className="nav">{renderNavLinks()}</nav>
+      {isAuth && <Button text={'Выход'} onClick={handleLogout} />}
     </header>
   );
 };
