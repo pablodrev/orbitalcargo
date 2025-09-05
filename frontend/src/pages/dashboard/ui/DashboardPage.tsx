@@ -7,7 +7,6 @@ import videoFile from '../../../assets/icons/vid.MP4';
 export const DashboardPage = () => {
   const [logs, setLogs] = useState<string[]>(['Все системы охлаждения работают нормально']);
   const [isSystemChecked, setIsSystemChecked] = useState(false);
-  const [areDoorsOpen, setAreDoorsOpen] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
   const [currentMission, setCurrentMission] = useState<{ direction: string; departureTime: string; weight: number } | null>(null);
   const [missionHistory, setMissionHistory] = useState<
@@ -113,6 +112,44 @@ export const DashboardPage = () => {
     }
   };
 
+  const fixCable = async () => {
+    try {
+      const response = await fetch('http://5.129.243.99:8000/api/missions/last/fix_cable', {
+        method: 'PATCH',
+        headers: { 'Accept': 'application/json' },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        addLog(data.message || 'Cable fixed successfully');
+        fetchLastMission(); // Refresh mission state
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      const err = error as Error;
+      addLog(`Error fixing cable: ${err.message}`);
+    }
+  };
+
+  const toggleDoors = async () => {
+    try {
+      const response = await fetch('http://5.129.243.99:8000/api/missions/last/fix_door', {
+        method: 'PATCH',
+        headers: { 'Accept': 'application/json' },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        addLog(data.message || 'Door state toggled successfully');
+        fetchLastMission(); // Refresh mission state to sync with server
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      const err = error as Error;
+      addLog(`Error toggling doors: ${err.message}`);
+    }
+  };
+
   useEffect(() => {
     fetchMissionHistory();
     return () => {
@@ -124,7 +161,7 @@ export const DashboardPage = () => {
 
   return (
     <div className="dashboard">
-      {/*<h2 className="dashboardTitle">Состояние подъемной системы</h2>*/}
+      <h2 className="dashboardTitle">Состояние подъемной системы</h2>
       <div className="dashboardGrid">
         {/* Placeholder for animation (to be revisited) */}
         <div className="animationSpace">
@@ -154,9 +191,9 @@ export const DashboardPage = () => {
               <ul>
                 {missionHistory.map((mission) => (
                   <li key={mission.id}>
-                    ID: {mission.id}, Direction: {mission.direction}, Status: {mission.status}, 
-                    State: {mission.state}, Door: {mission.door_state}, Departure: {new Date(mission.departure_time).toLocaleString()}, 
-                    Arrival: {mission.arrival_time ? new Date(mission.arrival_time).toLocaleString() : 'N/A'}, 
+                    ID: {mission.id}, Direction: {mission.direction}, Status: {mission.status},
+                    State: {mission.state}, Door: {mission.door_state}, Departure: {new Date(mission.departure_time).toLocaleString()},
+                    Arrival: {mission.arrival_time ? new Date(mission.arrival_time).toLocaleString() : 'N/A'},
                     Created By: {mission.created_by}
                   </li>
                 ))}
@@ -207,26 +244,27 @@ export const DashboardPage = () => {
                 disabled={isButtonsLocked}
               />
             )}
-            {!areDoorsOpen && (
+            {lastMission?.state !== 'doors opened' && (
               <Button
-                text="Принудительное открытие дверей"
-                onClick={() => {
-                  addLog('Двери принудительно открыты');
-                  setAreDoorsOpen(true);
-                }}
+                text="Закрыть дверь"
+                onClick={toggleDoors}
                 disabled={isButtonsLocked}
               />
             )}
-            {areDoorsOpen && (
+            {lastMission?.state === 'doors opened' && (
               <Button
-                text="Принудительное закрытие дверей"
-                onClick={() => {
-                  addLog('Двери принудительно закрыты');
-                  setAreDoorsOpen(false);
-                }}
+                text="Закрыть двери"
+                onClick={toggleDoors}
                 disabled={isButtonsLocked}
               />
             )}
+            {lastMission?.state === 'cable broken' && (
+  <Button
+    text="Исправить кабель"
+    onClick={fixCable}
+    disabled={isButtonsLocked}
+  />
+)}
           </div>
         </div>
 
@@ -237,6 +275,9 @@ export const DashboardPage = () => {
           ))}
         </div>
       </div>
+      <NavLink to="/" className="backButton">
+        Назад
+      </NavLink>
     </div>
   );
 };

@@ -7,8 +7,13 @@ $accent: #FF8F00;
   background-color: $primary-bg;
   color: $primary-text;
   padding: 2rem;
+<<<<<<< HEAD
+  min-height: 80vh;
+  font-family: 'Arial', 'Noto Sans', sans-serif;
+=======
   height: 100%;
   font-family: 'Ubuntu-Regular', sans-serif;
+>>>>>>> cad30484c9dbbea27b48724ce26b37843e8d9756
 
   .dashboardTitle {
     margin-bottom: 1.5rem;
@@ -23,9 +28,10 @@ $accent: #FF8F00;
       "animation contents"
       "control logs";
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 250px 250px;
+    grid-template-rows: 1fr 1fr;
     gap: 1rem;
-    flex-grow: 1;
+    min-height: 60vh;
+    margin-bottom: 1rem;
   }
 
   .animationSpace {
@@ -33,6 +39,9 @@ $accent: #FF8F00;
     position: relative;
     background-color: rgba($secondary-text, 0.3);
     border: 1px dashed $primary-text;
+<<<<<<< HEAD
+    min-height: 200px;
+=======
     overflow: hidden;
 
     .elevatorVideo {
@@ -41,104 +50,48 @@ $accent: #FF8F00;
       object-fit: cover; // Ensures video fills the space while maintaining aspect ratio
       display: block;
     }
+>>>>>>> cad30484c9dbbea27b48724ce26b37843e8d9756
   }
 
   .contentsInfo {
     grid-area: contents;
-    background-color: rgba($primary-bg, 0.9); // Более темный фон для контраста
-    padding: 1.5rem;
+    background-color: rgba($secondary-text, 0.3);
+    padding: 1rem;
     border: 1px solid $accent;
-     // Скругленные углы
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); // Мягкая тень
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; // Отступ между секциями
+    gap: 1rem;
 
-    // Стили для секции текущей миссии
-    .currentMission {
-      background-color: rgba($secondary-text, 0.2); // Легкий фон для выделения
-      padding: 1rem;
-      border-radius: 6px;
-      border-left: 4px solid $accent; // Акцентная полоса слева
-
-      h3 {
-        margin: 0 0 0.5rem;
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: $accent; // Акцентный цвет для заголовка
-      }
-
-      p {
-        margin: 0.3rem 0;
-        font-size: 1rem;
-        color: $primary-text;
-        line-height: 1.5;
-      }
-    }
-
-    // Стили для истории миссий
+    .currentMission,
     .missionHistory {
       padding: 1rem;
-      border-radius: 6px;
-      background-color: rgba($secondary-text, 0.2);
+      border: 1px solid $accent;
+      border-radius: 4px;
 
       h3 {
-        margin: 0 0 0.5rem;
-        font-size: 1.4rem;
-        font-weight: 600;
+        margin-top: 0;
+        font-size: 1.2rem;
         color: $accent;
       }
 
+      p, ul {
+        margin: 0.5rem 0;
+        font-size: 1.1rem;
+      }
+
       ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+        list-style-type: none;
+        padding-left: 0;
 
         li {
-          padding: 0.5rem 0;
-          font-size: 0.95rem;
-          color: $primary-text;
-          border-bottom: 1px solid rgba($primary-text, 0.1); // Разделитель
-          transition: background-color 0.2s ease;
-
-          &:hover {
-            background-color: rgba($accent, 0.1); // Подсветка при наведении
-          }
-
-          &:last-child {
-            border-bottom: none; // Убираем разделитель у последнего элемента
-          }
+          margin-bottom: 0.5rem;
         }
       }
-
-      p {
-        margin: 0.3rem 0;
-        font-size: 1rem;
-        color: $primary-text;
-        opacity: 0.8; // Для сообщения "No mission history"
-      }
-      scrollbar-width: thin; /* Firefox: slim scrollbar */
-      scrollbar-color: #ff9500 #3d3d3d;
     }
 
-    // Прокрутка
-    &::-webkit-scrollbar {
-      width: 8px; /* Slim scrollbar */
-    }
-
-    &::-webkit-scrollbar-track {
-      background: #3d3d3d; /* Dark track to blend with theme */
-      border-radius: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #ff9500; /* Orange thumb */
-      border-radius: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #e08500; /* Darker orange on hover */
+    .missionHistory {
+      max-height: 200px; // Fixed height for scrollable content
+      overflow-y: auto; // Enable vertical scrolling
     }
   }
 
@@ -157,7 +110,7 @@ $accent: #FF8F00;
         margin-bottom: 0;
       }
 
-      button.btn { // Target the Button component's base class
+      button.btn {
         padding: 0.5rem 1rem;
         background-color: $accent;
         color: $primary-text;
@@ -168,6 +121,12 @@ $accent: #FF8F00;
 
         &:hover:not(:disabled) {
           background-color: $secondary-text;
+        }
+
+        &:disabled {
+          background-color: $secondary-text;
+          cursor: not-allowed;
+          opacity: 0.6;
         }
       }
     }
@@ -180,7 +139,9 @@ $accent: #FF8F00;
     border: 1px solid $accent;
     font-size: 1rem;
     line-height: 1.4;
+    min-width: 300px;
     overflow-y: auto;
+    max-height: 200px;
 
     p {
       margin: 0;
@@ -231,6 +192,14 @@ $accent: #FF8F00;
     .controlPanel .buttonRow {
       flex-direction: column;
       gap: 0.5rem;
+    }
+
+    .contentsInfo {
+      flex-direction: column;
+    }
+
+    .missionHistory {
+      max-height: 150px; // Adjusted for smaller screens
     }
   }
 }
