@@ -2,7 +2,7 @@ import './DashboardPage.scss';
 import { Button } from '../../../shared/ui/button';
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-
+import videoFile from '../../../assets/icons/vid.MP4';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const DashboardPage = () => {
   const [logs, setLogs] = useState<string[]>(['Все системы охлаждения работают нормально']);
@@ -127,7 +127,12 @@ export const DashboardPage = () => {
       {/*<h2 className="dashboardTitle">Состояние подъемной системы</h2>*/}
       <div className="dashboardGrid">
         {/* Placeholder for animation (to be revisited) */}
-        <div className="animationSpace"></div>
+        <div className="animationSpace">
+          <video className="elevatorVideo" autoPlay loop muted playsInline>
+            <source src={videoFile} type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+        </div>
 
         {/* Инфа о текущей миссии и истории */}
         <div className="contentsInfo">
