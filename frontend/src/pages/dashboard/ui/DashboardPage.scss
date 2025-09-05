@@ -40,12 +40,41 @@ $accent: #FF8F00;
     grid-area: contents;
     background-color: rgba($secondary-text, 0.3);
     padding: 1rem;
-    text-align: center;
     border: 1px solid $accent;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
-    p {
-      margin: 0;
-      font-size: 1.1rem;
+    .currentMission,
+    .missionHistory {
+      padding: 1rem;
+      border: 1px solid $accent;
+      border-radius: 4px;
+
+      h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
+        color: $accent;
+      }
+
+      p, ul {
+        margin: 0.5rem 0;
+        font-size: 1.1rem;
+      }
+
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+
+    .missionHistory {
+      max-height: 200px; // Fixed height for scrollable content
+      overflow-y: auto; // Enable vertical scrolling
     }
   }
 
@@ -64,7 +93,7 @@ $accent: #FF8F00;
         margin-bottom: 0;
       }
 
-      button.btn { // Target the Button component's base class
+      button.btn {
         padding: 0.5rem 1rem;
         background-color: $accent;
         color: $primary-text;
@@ -75,6 +104,12 @@ $accent: #FF8F00;
 
         &:hover:not(:disabled) {
           background-color: $secondary-text;
+        }
+
+        &:disabled {
+          background-color: $secondary-text;
+          cursor: not-allowed;
+          opacity: 0.6;
         }
       }
     }
@@ -87,7 +122,7 @@ $accent: #FF8F00;
     border: 1px solid $accent;
     font-size: 1rem;
     line-height: 1.4;
-    min-width: 300px; // Wide enough for "Все системы охлаждения работают нормально"
+    min-width: 300px;
     overflow-y: auto;
     max-height: 200px;
 
@@ -140,6 +175,14 @@ $accent: #FF8F00;
     .controlPanel .buttonRow {
       flex-direction: column;
       gap: 0.5rem;
+    }
+
+    .contentsInfo {
+      flex-direction: column;
+    }
+
+    .missionHistory {
+      max-height: 150px; // Adjusted for smaller screens
     }
   }
 }
