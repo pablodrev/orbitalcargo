@@ -39,6 +39,7 @@ const Header: React.FC = () => {
           <>
             <Link to="/manager/createOrder" className="nav-link">Создать заявку</Link>
             <Link to="/manager/orders" className="nav-link">Заявки</Link>
+            <Link to="/manager/assignCargo" className="nav-link">Заполнить лифт</Link>
           </>
         );
       default:
@@ -59,9 +60,6 @@ const Header: React.FC = () => {
       <nav className="nav">
         {renderNavLinks()}
       </nav>
-      <div className="role">
-        {role ? `Роль: ${role}` : 'Не авторизован'}
-      </div>
       { isAuth && (
         <Button text={'Выход'} onClick={handleLogout} />
       )}

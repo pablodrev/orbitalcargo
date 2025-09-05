@@ -1,26 +1,87 @@
 .footer {
-  height: 50px;
+  background-color: #2d2d2d; /* Darker gray to match header */
+  color: #ffffff; /* White text for contrast */
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #373737; /* Lighter gray background */
-  color: #FFFFFF; /* White text */
-  padding: 1rem;
+  justify-content: space-around;
+  font-family: 'Ubuntu-Regular', sans-serif;
+  padding: 10px; /* Increased padding for better spacing */
   text-align: center;
-  font-family: 'Arial', 'Noto Sans', sans-serif;
+  box-shadow: 0 -4px 2px rgba(0, 0, 0, 0.2); /* Subtle top shadow for depth */
+  transition: background-color 0.3s ease; /* Smooth background transition */
 }
 
 .text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 1rem; /* Slightly larger for readability */
+  font-weight: 400;
+  letter-spacing: 0.5px; /* Subtle letter spacing for elegance */
 }
 
 .link {
-  color: #FF8F00;
+  color: #ff9500; /* Vibrant orange to match header */
   text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #ff9500; /* Orange underline */
+  transition: width 0.3s ease; /* Smooth underline animation */
 }
 
 .link:hover {
-  color: #272727;
-  text-decoration: underline;
+  color: #ffffff; /* White on hover for contrast */
+}
+
+.link:hover::after {
+  width: 100%; /* Full underline on hover */
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 1rem;
+  }
+
+  .text {
+    font-size: 0.9rem; /* Slightly smaller for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 0.75rem;
+  }
+
+  .text {
+    font-size: 0.85rem; /* Further adjustment for tiny screens */
+  }
+}
+
+.logo img {
+  width: auto;
+  height: 40px; /* Slightly smaller logo for balance */
+  transition: transform 0.3s ease; /* Smooth scaling on hover */
+}
+
+.logo img:hover {
+  transform: scale(1.05); /* Subtle zoom effect on logo hover */
+}
+
+.logos {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
 }
