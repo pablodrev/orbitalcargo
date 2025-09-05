@@ -38,45 +38,55 @@ const initialState: SlotState = {
 };
 
 // Получение слотов
-export const fetchSlots = createAsyncThunk<Slot[], void, { rejectValue: string }>(
-  "slots/fetchSlots",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await api.get<Slot[]>("/api/slot/");
-      return response.data;
-    } catch (err) {
-      const error = err as AxiosError<{ message?: string }>;
-      return rejectWithValue(error.response?.data?.message || "Ошибка при загрузке слотов");
-    }
+export const fetchSlots = createAsyncThunk<
+  Slot[],
+  void,
+  { rejectValue: string }
+>("slots/fetchSlots", async (_, { rejectWithValue }) => {
+  try {
+    const response = await api.get<Slot[]>("/api/slot/");
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<{ message?: string }>;
+    return rejectWithValue(
+      error.response?.data?.message || "Ошибка при загрузке слотов"
+    );
   }
-);
+});
 
 // Получение списка товаров
-export const fetchCargo = createAsyncThunk<CargoState, void, { rejectValue: string }>(
-  "slots/fetchCargo",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await api.get<CargoState>("/api/cargos/");
-      return response.data;
-    } catch (err) {
-      const error = err as AxiosError<{ message?: string }>;
-      return rejectWithValue(error.response?.data?.message || "Ошибка при загрузке товаров");
-    }
+export const fetchCargo = createAsyncThunk<
+  CargoState,
+  void,
+  { rejectValue: string }
+>("slots/fetchCargo", async (_, { rejectWithValue }) => {
+  try {
+    const response = await api.get<CargoState>("/api/cargos/");
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<{ message?: string }>;
+    return rejectWithValue(
+      error.response?.data?.message || "Ошибка при загрузке товаров"
+    );
   }
-);
+});
 
 // Назначение / освобождение груза
 export const assignCargo = createAsyncThunk<
   Slot,
-  { slotId: number; cargoId: number | null }, // null = освободить
+  { slotId: number; cargoId: number | null },
   { rejectValue: string }
 >("slots/assignCargo", async ({ slotId, cargoId }, { rejectWithValue }) => {
   try {
-    const response = await api.patch<Slot>(`/api/slot/${slotId}/assign-cargo/${cargoId ?? 0}`);
+    const response = await api.patch<Slot>(
+      `/api/slot/${slotId}/assign-cargo/${cargoId ?? 0}`
+    );
     return response.data;
   } catch (err) {
     const error = err as AxiosError<{ message?: string }>;
-    return rejectWithValue(error.response?.data?.message || "Ошибка при назначении груза");
+    return rejectWithValue(
+      error.response?.data?.message || "Ошибка при назначении груза"
+    );
   }
 });
 
@@ -94,6 +104,10 @@ const slotSlice = createSlice({
         state.loading = false;
         state.slots = action.payload;
       })
+      .addCase(fetchSlots.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Неизвестная ошибка";
+      })
       .addCase(fetchCargo.fulfilled, (state, action) => {
         state.cargo = action.payload;
       })
@@ -103,10 +117,7 @@ const slotSlice = createSlice({
         if (index !== -1) {
           state.slots[index] = updatedSlot;
         }
-      })
-      .addCase(fetchSlots.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || "Неизвестная ошибка";
+        // список cargo не трогаем — он обновляется через fetchCargo
       });
   },
 });

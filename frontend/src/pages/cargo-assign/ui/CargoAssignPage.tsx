@@ -16,8 +16,10 @@ export const CargoAssignPage = () => {
     dispatch(fetchCargo());
   }, [dispatch]);
 
-  const handleAssign = (slotId: number, cargoId: number | null) => {
-    dispatch(assignCargo({ slotId, cargoId }));
+  const handleAssign = async (slotId: number, cargoId: number | null) => {
+    await dispatch(assignCargo({ slotId, cargoId }));
+    await dispatch(fetchCargo());
+    await dispatch(fetchSlots());// обновляем список
   };
 
   const slotPositions: Record<number, string> = {
@@ -97,7 +99,7 @@ export const CargoAssignPage = () => {
             })()}
           </>
         ) : (
-          <h3>Выберите ячейку</h3>
+          <div className="choose-cell">Выберите ячейку</div>
         )}
       </div>
     </div>

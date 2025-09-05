@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { Button } from '../../../shared/ui/button';
 import { OrderDetails } from '../../order-details'; // Adjust path as needed
 import { useAppSelector } from '../../../hooks/rootState';
@@ -55,9 +55,9 @@ export const OrdersPage: React.FC = () => {
                     ))}
                 </ul>
             )}
-            <NavLink to="/" className="backButton">
-                Назад
-            </NavLink>
+            {/*<NavLink to="/" className="backButton">*/}
+            {/*    Назад*/}
+            {/*</NavLink>*/}
         </div>
     );
 };
