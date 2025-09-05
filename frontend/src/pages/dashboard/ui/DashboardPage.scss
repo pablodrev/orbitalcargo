@@ -7,8 +7,13 @@ $accent: #FF8F00;
   background-color: $primary-bg;
   color: $primary-text;
   padding: 2rem;
+<<<<<<< HEAD
   min-height: 80vh;
   font-family: 'Arial', 'Noto Sans', sans-serif;
+=======
+  height: 100%;
+  font-family: 'Ubuntu-Regular', sans-serif;
+>>>>>>> cad30484c9dbbea27b48724ce26b37843e8d9756
 
   .dashboardTitle {
     margin-bottom: 1.5rem;
@@ -31,9 +36,21 @@ $accent: #FF8F00;
 
   .animationSpace {
     grid-area: animation;
+    position: relative;
     background-color: rgba($secondary-text, 0.3);
     border: 1px dashed $primary-text;
+<<<<<<< HEAD
     min-height: 200px;
+=======
+    overflow: hidden;
+
+    .elevatorVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // Ensures video fills the space while maintaining aspect ratio
+      display: block;
+    }
+>>>>>>> cad30484c9dbbea27b48724ce26b37843e8d9756
   }
 
   .contentsInfo {
