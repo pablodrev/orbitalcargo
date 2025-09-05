@@ -3,6 +3,7 @@ from typing import Optional
 from app.models.enums import SizeEnum
 
 class SlotCreateSchema(BaseModel):
+    lift_id: int
     size: SizeEnum
 
 class SlotSchema(BaseModel):

@@ -11,16 +11,14 @@ class Mission(Base):
     __tablename__ = "missions"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
-    name: Mapped[str] = mapped_column(Text, nullable=False)
-    description: Mapped[str] = mapped_column(Text, nullable=True)
-    direction: Mapped[Enum] = mapped_column(Enum(DirectionEnum), nullable=False)
-    status: Mapped[Enum] = mapped_column(Enum(StatusEnum), nullable=False)
-    door_state: Mapped[Enum] = mapped_column(Enum(DoorStatesEnum), nullable=False)
+    direction: Mapped[DirectionEnum] = mapped_column(Enum(DirectionEnum), nullable=False)
+    status: Mapped[StatusEnum] = mapped_column(Enum(StatusEnum), nullable=False, default=StatusEnum.PENDING)
+    door_state: Mapped[DoorStatesEnum] = mapped_column(Enum(DoorStatesEnum), nullable=False, default=DoorStatesEnum.CLOSED)
 
-    departure_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now())
-    arrived_at: Mapped[datetime] = mapped_column(TIMESTAMP, nullable=True)
+    departure_time: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now())
+    arrival_time: Mapped[datetime] = mapped_column(TIMESTAMP, nullable=True)
 
     created_by: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False) # в случае кибератаки будет ясно, чей аккаунт взломан
 
-    cargos: Mapped[List[Cargo]] = relationship("Cargo", back_populates="mission")
+    cargos: Mapped[List["Cargo"]] = relationship("Cargo", back_populates="mission", cascade="all, delete-orphan")
     

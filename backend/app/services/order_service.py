@@ -34,3 +34,7 @@ class OrderService:
     def list_orders(db: Session):
         orders = db.query(Order).all()
         return orders
+    
+    @staticmethod
+    def get_order(db: Session, order_id: int):
+        return db.query(Order).filter(Order.id == order_id).first()

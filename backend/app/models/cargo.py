@@ -14,6 +14,9 @@ class Cargo(Base):
     weight: Mapped[float] = mapped_column(nullable=False)
     position: Mapped[PositionEnum] = mapped_column(Enum(PositionEnum), nullable=False)
     status: Mapped[StatusEnum] = mapped_column(Enum(StatusEnum), nullable=False, default=StatusEnum.PENDING)
+    
+    mission_id: Mapped[int] = mapped_column(ForeignKey("missions.id"), nullable=True)
+    mission: Mapped["Mission"] = relationship(back_populates="cargos")
 
     order_id: Mapped[int] = mapped_column(ForeignKey("orders.id"), nullable=False)
     order: Mapped["Order"] = relationship(back_populates="cargos")

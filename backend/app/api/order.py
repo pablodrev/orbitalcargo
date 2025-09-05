@@ -6,7 +6,7 @@ from app.services.order_service import OrderService
 from fastapi.responses import JSONResponse
 
 
-router = APIRouter(tags=['order'])
+router = APIRouter(tags=['Order'])
 
 @router.post("/")
 def create_order(order_data: OrderCreateSchema, db: Session = Depends(database.get_db)):
@@ -19,3 +19,11 @@ def create_order(order_data: OrderCreateSchema, db: Session = Depends(database.g
 def list_orders(db: Session = Depends(database.get_db)):
     orders = OrderService.list_orders(db)
     return orders
+
+@router.get("/{order_id}")
+def get_order(order_id: int, db: Session = Depends(database.get_db)):
+    order = OrderService.get_order(db, order_id)
+    if order:
+        return OrderResponseSchema.model_validate(order)
+    else:
+        return JSONResponse(status_code=404, content={"message": "Order not found"})
