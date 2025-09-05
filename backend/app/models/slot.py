@@ -11,7 +11,7 @@ class Slot(Base):
     size: Mapped[SizeEnum] = mapped_column(Enum(SizeEnum, name="slot_size"), nullable=False)
 
     cargo_id: Mapped[int] = mapped_column(ForeignKey("cargos.id", ondelete="SET NULL"), nullable=True, index=True)
-    cargo: Mapped["Cargo"] = relationship()
+    cargo: Mapped["Cargo"] = relationship(back_populates="slot")
 
     lift_id: Mapped[int] = mapped_column(ForeignKey("lift.id", ondelete="CASCADE"), nullable=False, index=True)
     lift: Mapped["Lift"] = relationship("Lift", back_populates="slots")

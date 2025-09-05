@@ -21,5 +21,7 @@ class Cargo(Base):
     order_id: Mapped[int] = mapped_column(ForeignKey("orders.id"), nullable=False)
     order: Mapped["Order"] = relationship(back_populates="cargos")
 
+    slot: Mapped["Slot"] = relationship(back_populates="cargo", uselist=False)
+
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now(), onupdate=func.now())

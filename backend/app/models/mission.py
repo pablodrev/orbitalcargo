@@ -12,6 +12,7 @@ class Mission(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     direction: Mapped[DirectionEnum] = mapped_column(Enum(DirectionEnum), nullable=False)
+    state: Mapped[Text] = mapped_column(Text, nullable=True)
     status: Mapped[StatusEnum] = mapped_column(Enum(StatusEnum), nullable=False, default=StatusEnum.PENDING)
     door_state: Mapped[DoorStatesEnum] = mapped_column(Enum(DoorStatesEnum), nullable=False, default=DoorStatesEnum.CLOSED)
 

@@ -9,7 +9,7 @@ class MissionCreateSchema(BaseModel):
     created_by: int
     departure_time: Optional[datetime] = None
     arrival_time: Optional[datetime] = None
-    cargos: Optional[List[int]] = Field(default=None, description="List of cargo IDs")
+    #cargos: Optional[List[int]] = Field(default=None, description="List of cargo IDs")
 
 class MissionResponseSchema(BaseModel):
     id: int
