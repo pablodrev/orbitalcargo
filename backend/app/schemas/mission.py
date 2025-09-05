@@ -15,6 +15,7 @@ class MissionResponseSchema(BaseModel):
     id: int
     direction: DirectionEnum
     status: StatusEnum
+    state: str
     door_state: DoorStatesEnum
     departure_time: datetime
     arrival_time: Optional[datetime] = None
