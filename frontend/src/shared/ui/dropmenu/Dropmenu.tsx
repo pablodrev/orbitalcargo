@@ -2,7 +2,7 @@ import "./dropmenu.css";
 
 interface DropmenuProps<T extends string> {
     label: string;
-    options: readonly T[];
+    options: readonly { value: T; label: string }[];
     value: T | "";
     onChange: (value: T | "") => void;
     placeholder?: string;
@@ -32,8 +32,8 @@ export function Dropmenu<T extends string>({
                     </option>
                 )}
                 {options.map((opt) => (
-                    <option key={opt} value={opt}>
-                        {opt}
+                    <option key={opt.value} value={opt.value}>
+                        {opt.label}
                     </option>
                 ))}
             </select>

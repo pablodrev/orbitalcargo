@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CreateOrderPage.scss";
 import { Input } from "../../../shared/ui/input";
 import { Button } from "../../../shared/ui/button";
@@ -12,6 +12,8 @@ import {
     setDirection,
     createOrder,
 } from "../../../features/order/model/orderSlice";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const CreateOrderPage: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -19,26 +21,52 @@ export const CreateOrderPage: React.FC = () => {
         (state) => state.order
     );
 
-    const directions = ["To Orbit", "To Earth"] as const;
-    type Direction = typeof directions[number];
+    const directions = [
+        { value: "To Orbit", label: "На орбиту" },
+        { value: "To Earth", label: "На Землю" },
+    ] as const;
+    type Direction = typeof directions[number]["value"];
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+            });
+        }
+    }, [error]);
 
     const handleSubmit = () => {
-        dispatch(createOrder());
+        dispatch(createOrder()).then((action) => {
+            if (createOrder.fulfilled.match(action)) {
+                toast.success("Заказ успешно создан!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "dark",
+                });
+            }
+            // No changes needed here, as no alert is present in handleSubmit
+        });
     };
 
+    // Rest of the code remains unchanged
     return (
         <div className="create-order">
+            <ToastContainer />
             <h2>Создание заказа</h2>
-
-            {error && (
-                <div className="error-message" style={{ color: "red", marginBottom: "10px" }}>
-                    {error}
-                </div>
-            )}
 
             <div className="form-row">
                 <Input
-                    label="Sender"
+                    label="Отправитель"
                     value={sender}
                     onChange={(e) => dispatch(setSender(e.target.value))}
                     disabled={loading}

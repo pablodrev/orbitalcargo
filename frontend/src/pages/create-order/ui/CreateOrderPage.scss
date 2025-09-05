@@ -3,6 +3,7 @@
     flex-direction: column;
     min-width: 400px;
     max-width: 700px;
+    max-height: 70vh;
     margin: 40px auto;
     padding: 40px;
     background-color: var(--color-gray-01);
@@ -34,17 +35,6 @@
         margin: 10px auto 0;
         border-radius: 2px;
     }
-}
-
-.error-message {
-    font-family: 'Ubuntu-Regular', sans-serif;
-    font-size: 14px;
-    color: #ff4d4f;
-    text-align: center;
-    padding: 10px;
-    background-color: rgba(255, 77, 79, 0.1);
-    border-radius: 4px;
-    border: 1px solid #ff4d4f;
 }
 
 .form-row {
@@ -94,4 +84,37 @@
         opacity: 0.6;
         cursor: not-allowed;
     }
+}
+
+/* Custom styles for react-toastify */
+.Toastify__toast--error {
+    background-color: var(--color-gray-01);
+    color: var(--color-white);
+    font-family: 'Ubuntu-Regular', sans-serif;
+    border: 1px solid #ff4d4f;
+    border-radius: 8px;
+}
+
+.Toastify__toast--success {
+    background-color: var(--color-gray-01);
+    color: var(--color-white);
+    font-family: 'Ubuntu-Regular', sans-serif;
+    border: 1px solid var(--color-01);
+    border-radius: 8px;
+}
+
+.Toastify__toast-icon svg {
+    fill: #ff4d4f; /* Red for error */
+}
+
+.Toastify__toast--success .Toastify__toast-icon svg {
+    fill: var(--color-01); /* Orange for success */
+}
+
+.Toastify__progress-bar--error {
+    background-color: #ff4d4f; /* Red for error */
+}
+
+.Toastify__progress-bar--success {
+    background-color: var(--color-01); /* Orange for success */
 }

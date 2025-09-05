@@ -110,8 +110,7 @@ const orderSlice = createSlice({
                 state.phoneNumber = "";
                 state.direction = "";
                 state.cargos = [];
-                // Success feedback
-                alert("Заказ успешно создан!");
+
             })
             .addCase(createOrder.rejected, (state, action) => {
                 state.loading = false;

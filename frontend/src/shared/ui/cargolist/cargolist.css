@@ -30,6 +30,27 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 200px; /* Fixed height for scroll */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 5px; /* Space for scrollbar */
+}
+
+.cargo-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cargo-list::-webkit-scrollbar-track {
+    background: var(--color-gray-02);
+    border-radius: 4px;
+}
+
+.cargo-list::-webkit-scrollbar-thumb {
+    background: var(--color-01);
+    border-radius: 4px;
+}
+
+.cargo-list::-webkit-scrollbar-thumb:hover {
+    background: #e07b00;
 }
 
 .cargo-item {
@@ -46,7 +67,7 @@
 
 .cargo-info {
     display: grid;
-    grid-template-columns: repeat(3, 1fr) 100px 60px; /* Equal width for fields, fixed for buttons */
+    grid-template-columns: repeat(3, 1fr) 60px; /* Adjusted for removed Edit button */
     align-items: center;
     gap: 3px; /* 3px gap between fields */
 }
@@ -93,4 +114,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Custom styles for react-toastify */
+.Toastify__toast--error {
+    background-color: var(--color-gray-01);
+    color: var(--color-white);
+    font-family: 'Ubuntu-Regular', sans-serif;
+    border: 1px solid #ff4d4f;
+    border-radius: 8px;
+}
+
+.Toastify__toast-icon svg {
+    fill: #ff4d4f; /* Red for error */
+}
+
+.Toastify__progress-bar--error {
+    background-color: var(--color-01); /* Orange for progress bar */
 }

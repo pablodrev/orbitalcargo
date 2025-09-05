@@ -1,40 +1,47 @@
-// src/shared/ui/cargolist/CargoList.tsx
 import React, { useState } from "react";
 import { useAppSelector } from "../../../hooks/rootState.ts";
 import { useAppDispatch } from "../../../hooks/dispatch.ts";
-import type { Cargo, CargoSize } from "../../../features/order/model/orderSlice.ts" // Use type-only import
+import type { Cargo } from "../../../features/order/model/orderSlice.ts"; // Use type-only import
 import {
     addCargo,
-    updateCargo,
     removeCargo,
-} from "../../../features/order/model/orderSlice.ts"; // Value imports
+} from "../../../features/order/model/orderSlice.ts"; // Removed updateCargo
 import { Input } from "../input";
 import { Button } from "../button";
 import { Dropmenu } from "../dropmenu";
+import { toast, ToastContainer } from "react-toastify";
 import "./cargolist.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export const CargoList: React.FC = () => {
     const dispatch = useAppDispatch();
     const cargos = useAppSelector((state) => state.order.cargos);
 
-    // Options for size enum as per API schema
-    const sizes: CargoSize[] = ["Small", "Medium", "Large"];
+    // Options for size enum with Russian labels
+    const sizes = [
+        { value: "Small", label: "Маленький" },
+        { value: "Medium", label: "Средний" },
+        { value: "Large", label: "Большой" },
+    ] as const;
+    type CargoSize = typeof sizes[number]["value"];
 
     // State for adding new cargo
     const [newName, setNewName] = useState<string>("");
     const [newSize, setNewSize] = useState<CargoSize | "">(""); // Allow "" for placeholder
     const [newWeight, setNewWeight] = useState<string>(""); // String for input, convert to number
 
-    // State for editing existing cargo
-    const [editingIndex, setEditingIndex] = useState<number | null>(null);
-    const [editingName, setEditingName] = useState<string>("");
-    const [editingSize, setEditingSize] = useState<CargoSize | "">(""); // Allow "" for placeholder
-    const [editingWeight, setEditingWeight] = useState<string>("");
-
     const handleAddCargo = () => {
         const weightNum = parseFloat(newWeight);
         if (!newName.trim() || !newSize || isNaN(weightNum) || weightNum <= 0) {
-            alert("Заполните все поля для нового груза (вес должен быть числом > 0)");
+            toast.error("Заполните все поля для нового груза (вес должен быть числом > 0)", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+            });
             return;
         }
         const newCargo: Cargo = {
@@ -48,39 +55,13 @@ export const CargoList: React.FC = () => {
         setNewWeight("");
     };
 
-    const startEditing = (index: number) => {
-        const cargo = cargos[index];
-        setEditingIndex(index);
-        setEditingName(cargo.name);
-        setEditingSize(cargo.size);
-        setEditingWeight(cargo.weight.toString());
-    };
-
-    const handleUpdateCargo = () => {
-        if (editingIndex === null) return;
-        const weightNum = parseFloat(editingWeight);
-        if (!editingName.trim() || !editingSize || isNaN(weightNum) || weightNum <= 0) {
-            alert("Заполните все поля для обновления груза (вес должен быть числом > 0)");
-            return;
-        }
-        const updatedCargo: Cargo = {
-            name: editingName,
-            size: editingSize as CargoSize, // Safe cast since we check !editingSize
-            weight: weightNum,
-        };
-        dispatch(updateCargo({ index: editingIndex, cargo: updatedCargo }));
-        setEditingIndex(null);
-        setEditingName("");
-        setEditingSize("");
-        setEditingWeight("");
-    };
-
     const handleRemoveCargo = (index: number) => {
         dispatch(removeCargo(index));
     };
 
     return (
         <div className="cargo-wrapper">
+            <ToastContainer />
             <div className="cargo-header">
                 <div className="cargo-input">
                     <Input
@@ -115,50 +96,15 @@ export const CargoList: React.FC = () => {
                 ) : (
                     cargos.map((cargo, index) => (
                         <div key={index} className="cargo-item">
-                            {editingIndex === index ? (
-                                <div className="cargo-header">
-                                    <div className="cargo-input">
-                                        <Input
-                                            label="Название"
-                                            value={editingName}
-                                            onChange={(e) => setEditingName(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="cargo-input">
-                                        <Input
-                                            label="Вес"
-                                            type="number"
-                                            value={editingWeight}
-                                            onChange={(e) => setEditingWeight(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="cargo-input">
-                                        <Dropmenu<CargoSize>
-                                            label="Размер"
-                                            options={sizes}
-                                            value={editingSize}
-                                            onChange={(val) => setEditingSize(val)}
-                                            placeholder="Выберите размер"
-                                        />
-                                    </div>
-                                    <Button text="Сохранить" onClick={handleUpdateCargo} />
-                                    <Button
-                                        icon={<span>✕</span>}
-                                        onClick={() => setEditingIndex(null)}
-                                    />
-                                </div>
-                            ) : (
-                                <div className="cargo-info">
-                                    <span>{cargo.name}</span>
-                                    <span>{cargo.weight} кг</span>
-                                    <span>{cargo.size}</span>
-                                    <Button text="Редактировать" onClick={() => startEditing(index)} />
-                                    <Button
-                                        icon={<span>✕</span>}
-                                        onClick={() => handleRemoveCargo(index)}
-                                    />
-                                </div>
-                            )}
+                            <div className="cargo-info">
+                                <span>{cargo.name}</span>
+                                <span>{cargo.weight} кг</span>
+                                <span>{cargo.size}</span>
+                                <Button
+                                    icon={<span>✕</span>}
+                                    onClick={() => handleRemoveCargo(index)}
+                                />
+                            </div>
                         </div>
                     ))
                 )}
