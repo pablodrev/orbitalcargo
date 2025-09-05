@@ -36,15 +36,100 @@ $accent: #FF8F00;
 
   .contentsInfo {
     grid-area: contents;
-    background-color: rgba($secondary-text, 0.3);
-    padding: 1rem;
-    text-align: center;
+    background-color: rgba($primary-bg, 0.9); // Более темный фон для контраста
+    padding: 1.5rem;
     border: 1px solid $accent;
+     // Скругленные углы
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); // Мягкая тень
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; // Отступ между секциями
 
-    p {
-      margin: 0;
-      font-size: 1.1rem;
+    // Стили для секции текущей миссии
+    .currentMission {
+      background-color: rgba($secondary-text, 0.2); // Легкий фон для выделения
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 4px solid $accent; // Акцентная полоса слева
+
+      h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: $accent; // Акцентный цвет для заголовка
+      }
+
+      p {
+        margin: 0.3rem 0;
+        font-size: 1rem;
+        color: $primary-text;
+        line-height: 1.5;
+      }
+    }
+
+    // Стили для истории миссий
+    .missionHistory {
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: rgba($secondary-text, 0.2);
+
+      h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: $accent;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          padding: 0.5rem 0;
+          font-size: 0.95rem;
+          color: $primary-text;
+          border-bottom: 1px solid rgba($primary-text, 0.1); // Разделитель
+          transition: background-color 0.2s ease;
+
+          &:hover {
+            background-color: rgba($accent, 0.1); // Подсветка при наведении
+          }
+
+          &:last-child {
+            border-bottom: none; // Убираем разделитель у последнего элемента
+          }
+        }
+      }
+
+      p {
+        margin: 0.3rem 0;
+        font-size: 1rem;
+        color: $primary-text;
+        opacity: 0.8; // Для сообщения "No mission history"
+      }
+      scrollbar-width: thin; /* Firefox: slim scrollbar */
+      scrollbar-color: #ff9500 #3d3d3d;
+    }
+
+    // Прокрутка
+    &::-webkit-scrollbar {
+      width: 8px; /* Slim scrollbar */
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #3d3d3d; /* Dark track to blend with theme */
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #ff9500; /* Orange thumb */
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #e08500; /* Darker orange on hover */
     }
   }
 
