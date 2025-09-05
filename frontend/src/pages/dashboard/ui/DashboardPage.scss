@@ -76,14 +76,6 @@ $accent: #FF8F00;
         &:hover:not(:disabled) {
           background-color: $secondary-text;
         }
-
-        /* Visual cue for buttons that should be disabled */
-        &:nth-child(1):nth-last-child(2),
-        &:nth-child(2):nth-last-child(2) { // Targets "Отправить лифт наверх/вниз" and "Остановить лифт"
-          opacity: 0.5;
-          cursor: not-allowed;
-          pointer-events: none; // Prevents clicks
-        }
       }
     }
   }
@@ -101,7 +93,7 @@ $accent: #FF8F00;
 
     p {
       margin: 0;
-      color: $secondary-text;
+      color: $primary-text;
     }
   }
 
