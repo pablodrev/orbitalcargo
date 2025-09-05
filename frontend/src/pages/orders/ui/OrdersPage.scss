@@ -1,7 +1,7 @@
 .ordersContainer {
   display: flex;
   flex-direction: column;
-  min-width: 400px;
+  min-width: 600px;
   max-width: 900px;
   margin: 40px auto;
   padding: 40px;
@@ -38,7 +38,7 @@
 .orderList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px; /* Slightly increased from 10px for more spacing */
   list-style: none;
   padding: 0;
   margin: 0;
@@ -46,12 +46,13 @@
 
 .orderItem {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 120px;
+  grid-template-columns: 1.5fr 1fr 1fr 150px; /* Adjusted proportions for wider layout */
   align-items: center;
   padding: 15px;
   background-color: var(--color-gray-02);
   border: 1px solid var(--color-gray-02);
   border-radius: 8px;
+  gap: 15px; /* Increased gap for more spacing between columns */
   transition: transform 0.2s ease, background-color 0.3s ease;
 
   &:hover {
@@ -64,7 +65,7 @@
   font-family: 'Ubuntu-Regular', sans-serif;
   color: var(--color-white);
   font-size: 14px;
-  padding: 8px;
+  padding: 10px; /* Increased from 8px for more spacing */
   border-right: 1px solid var(--color-gray-02);
 
   &:last-child {
@@ -74,6 +75,7 @@
 
 .orderItem .btn {
   justify-self: end;
+  padding: 0 20px; /* Ensure button fits wider layout */
 }
 
 .backButton {
@@ -95,7 +97,7 @@
   color: var(--color-white);
   font-size: 14px;
   text-align: center;
-  padding: 10px;
+  padding: 12px; /* Slightly increased for consistency */
   background-color: var(--color-gray-02);
   border-radius: 4px;
 }
