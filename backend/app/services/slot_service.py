@@ -14,12 +14,9 @@ class SlotService:
     
     @staticmethod
     def create_slot(db: Session, slot_data: SlotCreateSchema):
-        print(slot_data)
-        print(type(slot_data.size))
         new_slot: Slot = Slot(
             size = slot_data.size,
-            lift_id = slot_data.lift_id,
-            free = slot_data.free
+            lift_id = slot_data.lift_id
         )
         
         db.add(new_slot)

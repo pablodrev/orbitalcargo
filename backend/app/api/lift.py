@@ -4,6 +4,7 @@ from app.database.database import get_db
 from app.models.lift import Lift
 from app.schemas.lift import LiftSchema, LiftCreateSchema
 from app.services.lift_service import LiftService
+from fastapi.responses import JSONResponse
 
 router = APIRouter(tags=["Lift"])
 
@@ -20,11 +21,11 @@ def get_lift(lift_id: int, db: Session = Depends(get_db)):
     if lift:
         return lift
     else:
-        return {"message": "Lift not found"}, 404
+        return JSONResponse(status_code=404, content={"message": "Lift not found"})
     
 @router.post("/")
 def create_lift(lift_data: LiftCreateSchema, db: Session = Depends(get_db)):
     lift = LiftService.create_lift(db, lift_data)
     if lift:
         return {"message": "Lift created successfully", "lift_id": lift.id}
-    return {"message": "Lift creation failed"}, 400
+    return JSONResponse(status_code=400, content={"message": "Lift creation failed"})
