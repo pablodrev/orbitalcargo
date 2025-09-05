@@ -1,15 +1,20 @@
-
 .order-details-container {
     display: flex;
     flex-direction: column;
-    min-width: 600px;
+    min-width: 400px;
     max-width: 900px;
-    margin: 20px auto;
-    padding: 30px;
+    margin: 40px auto;
+    padding: 40px;
     background-color: var(--color-gray-01);
-    border-radius: 8px;
+    border-radius: 12px;
     border: 1px solid var(--color-gray-02);
-    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    gap: 30px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
 }
 
 .order-details-header {
@@ -21,8 +26,18 @@
 .order-details-header h2 {
     font-family: 'Ubuntu-Medium', sans-serif;
     color: var(--color-white);
-    font-size: 22px;
+    font-size: 24px;
     margin: 0;
+
+    &::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: var(--color-01);
+        margin: 10px 0 0;
+        border-radius: 2px;
+    }
 }
 
 .order-details-body {
@@ -31,11 +46,22 @@
     gap: 20px;
 }
 
+.order-details-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .order-details-info p {
     font-family: 'Ubuntu-Regular', sans-serif;
     color: var(--color-white);
     font-size: 16px;
-    margin: 5px 0;
+    margin: 0;
+
+    strong {
+        font-family: 'Ubuntu-Medium', sans-serif;
+        margin-right: 8px;
+    }
 }
 
 .order-details-body h3 {
@@ -43,6 +69,16 @@
     color: var(--color-white);
     font-size: 18px;
     margin: 10px 0;
+
+    &::after {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 2px;
+        background-color: var(--color-01);
+        margin-top: 5px;
+        border-radius: 2px;
+    }
 }
 
 .order-details-cargos {
@@ -53,61 +89,59 @@
 
 .order-details-cargos-header {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     font-family: 'Ubuntu-Medium', sans-serif;
     color: var(--color-white);
     background-color: var(--color-gray-02);
-    padding: 10px;
-    border-radius: 4px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--color-gray-02);
 }
 
 .order-details-cargos-header span {
-    padding: 5px;
+    padding: 8px;
     font-size: 14px;
+    border-right: 1px solid var(--color-gray-02);
+
+    &:last-child {
+        border-right: none;
+    }
 }
 
 .order-details-cargo-row {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-    padding: 10px;
-    border-bottom: 1px solid var(--color-gray-02);
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 12px;
+    background-color: var(--color-gray-01);
+    border: 1px solid var(--color-gray-02);
+    border-radius: 8px;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        background-color: #3e3e3e;
+    }
 }
 
 .order-details-cargo-row span {
     font-family: 'Ubuntu-Regular', sans-serif;
     color: var(--color-white);
     font-size: 14px;
-    padding: 5px;
+    padding: 8px;
+    border-right: 1px solid var(--color-gray-02);
+
+    &:last-child {
+        border-right: none;
+    }
 }
 
-.order-details-create-cargo {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px;
+.order-details-cargos p {
+    font-family: 'Ubuntu-Regular', sans-serif;
+    color: var(--color-white);
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
     background-color: var(--color-gray-02);
     border-radius: 4px;
-}
-
-.input-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.input-label {
-    font-family: 'Ubuntu-Regular', sans-serif;
-    color: var(--color-white);
-    font-size: 14px;
-}
-
-.input-field {
-    width: 100%;
-    padding: 8px;
-    font-family: 'Ubuntu-Regular', sans-serif;
-    font-size: 14px;
-    color: var(--color-white);
-    background-color: var(--color-gray-01);
-    border: 1px solid var(--color-gray-02);
-    border-radius: 4px;
+    margin: 10px 0;
 }
