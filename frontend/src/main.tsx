@@ -14,6 +14,7 @@ import {CreateOrderPage} from "./pages/create-order";
 import { OrdersPage } from './pages/orders/index.ts';
 import {DashboardPage} from "./pages/dashboard";
 import {HomePage} from "./pages/home";
+import {CargoAssignPage} from "./pages/cargo-assign";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
           {
             path: 'orders',
             element: <OrdersPage/>,
+          },
+          {
+            path: 'assignCargo',
+            element: <CargoAssignPage />
           }
         ]
       },

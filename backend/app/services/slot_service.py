@@ -29,7 +29,10 @@ class SlotService:
     def assign_cargo(db: Session, slot_id: int, cargo_id: int):
         slot = db.query(Slot).filter(Slot.id == slot_id).first()
         if slot:
-            slot.cargo_id = cargo_id
+            if cargo_id == 0:
+                slot.cargo_id = None
+            else:
+                slot.cargo_id = cargo_id
             db.commit()
             db.refresh(slot)
             return slot

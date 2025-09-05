@@ -1,102 +1,103 @@
-$primary-bg: #272727;
-$primary-text: #FFFFFF;
-$secondary-text: #373737;
-$accent: #FF8F00;
-
 .ordersContainer {
-  background-color: $primary-bg;
-  color: $primary-text;
-  padding: 2rem;
-  min-height: 80vh;
-  font-family: 'Arial', 'Noto Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: var(--color-gray-01);
+  border-radius: 12px;
+  border: 1px solid var(--color-gray-02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  gap: 30px;
+  transition: transform 0.3s ease;
 
-  .title {
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
+  &:hover {
+    transform: translateY(-2px);
   }
+}
 
-  .orderList {
-    list-style: none;
-    padding: 0;
-    max-width: 800px;
-    margin: 0 auto;
+.title {
+  font-family: 'Ubuntu-Medium', sans-serif;
+  color: var(--color-white);
+  font-size: 24px;
+  text-align: center;
+  margin: 0;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-01);
+    margin: 10px auto 0;
+    border-radius: 2px;
   }
+}
 
-  .orderItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; // Distributes items evenly
-    padding: 1rem;
-    margin-bottom: 0.5rem;
-    background-color: rgba(55, 55, 55, 0.8); // Slightly lighter for readability
-    border-radius: 4px;
+.orderList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Slightly increased from 10px for more spacing */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    &:hover {
-      background-color: rgba(55, 55, 55, 0.9);
-    }
+.orderItem {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 150px; /* Adjusted proportions for wider layout */
+  align-items: center;
+  padding: 15px;
+  background-color: var(--color-gray-02);
+  border: 1px solid var(--color-gray-02);
+  border-radius: 8px;
+  gap: 15px; /* Increased gap for more spacing between columns */
+  transition: transform 0.2s ease, background-color 0.3s ease;
 
-    // Split the text into spans for distribution
-    span {
-      margin-right: 1rem; // Space between properties
-      &:last-child {
-        margin-right: 0; // No extra space before the button
-      }
-    }
+  &:hover {
+    transform: translateY(-2px);
+    background-color: #3e3e3e;
   }
+}
 
-  .moreButton {
-    padding: 0.25rem 0.75rem;
-    background-color: $accent;
-    color: $primary-text;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
+.orderItem span {
+  font-family: 'Ubuntu-Regular', sans-serif;
+  color: var(--color-white);
+  font-size: 14px;
+  padding: 10px; /* Increased from 8px for more spacing */
+  border-right: 1px solid var(--color-gray-02);
 
-    &:hover {
-      background-color: $secondary-text;
-    }
+  &:last-child {
+    border-right: none;
   }
+}
 
-  .backButton {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.75rem 1.5rem;
-    background-color: $accent;
-    color: $primary-text;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
+.orderItem .btn {
+  justify-self: end;
+  padding: 0 20px; /* Ensure button fits wider layout */
+}
 
-    &:hover {
-      background-color: $secondary-text;
-    }
+.backButton {
+  font-family: 'Ubuntu-Regular', sans-serif;
+  color: var(--color-01);
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #e07b00;
   }
+}
 
-  @media (max-width: 600px) {
-    padding: 1rem;
-
-    .title {
-      font-size: 1.5rem;
-    }
-
-    .orderItem {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 0.5rem;
-
-      span {
-        display: block; // Stack vertically on small screens
-        margin-bottom: 0.5rem;
-        margin-right: 0;
-      }
-
-      .moreButton {
-        margin-top: 0.5rem;
-      }
-    }
-  }
+.ordersContainer > div {
+  font-family: 'Ubuntu-Regular', sans-serif;
+  color: var(--color-white);
+  font-size: 14px;
+  text-align: center;
+  padding: 12px; /* Slightly increased for consistency */
+  background-color: var(--color-gray-02);
+  border-radius: 4px;
 }
