@@ -124,7 +124,7 @@ export const DashboardPage = () => {
 
   return (
     <div className="dashboard">
-      <h2 className="dashboardTitle">Состояние подъемной системы</h2>
+      {/*<h2 className="dashboardTitle">Состояние подъемной системы</h2>*/}
       <div className="dashboardGrid">
         {/* Placeholder for animation (to be revisited) */}
         <div className="animationSpace"></div>
@@ -232,9 +232,6 @@ export const DashboardPage = () => {
           ))}
         </div>
       </div>
-      <NavLink to="/" className="backButton">
-        Назад
-      </NavLink>
     </div>
   );
 };
