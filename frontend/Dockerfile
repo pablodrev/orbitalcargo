@@ -1,19 +1,21 @@
-# frontend/Dockerfile (development)
+FROM node:20
 
-FROM node:18
-
-# 1. Рабочая директория
+# Set working directory
 WORKDIR /usr/src/app
 
-# 2. Установим зависимости
+# Install dependencies with development packages
 COPY package*.json ./
 RUN npm install
 
-# 3. Копируем исходники
+# Set NODE_ENV to development
+ENV NODE_ENV=development
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+
+# Don't copy node_modules from host
 COPY . .
 
-# 4. Откроем порт React Dev Server
-EXPOSE 3000
+# Expose Vite dev server port
+EXPOSE 5173
 
-# 5. Запуск dev-сервера (с горячей перезагрузкой)
-CMD ["npm", "start"]
+# Start development server with hot reloading and bind to all interfaces
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
