@@ -45,6 +45,10 @@ by bad bananas
 
 4. Документация для backend доступна по адресу: [http://localhost:8000/docs](http://localhost:8000/docs)
 
+5. По умолчанию создано два пользователя с ролями менеджера и оператора:
+- Username: manager, Password: manager123
+- Username: operator, Password: operator123
+
 Для остановки и удаления контейнеров выполните:
 
 ```sh

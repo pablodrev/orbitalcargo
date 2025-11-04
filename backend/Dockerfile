@@ -15,10 +15,13 @@ RUN pip install --no-cache-dir --upgrade pip \
 # 4. Копируем всё приложение внутрь контейнера
 COPY ./app /app
 
+# Добавим скрипт entrypoint для применения миграций перед стартом
+COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # 5. Переменные окружения
-# (например, чтобы Python не кешировал .pyc и вывод логов шел сразу)
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# 6. Запуск (для dev-режима можно с --reload, для prod — gunicorn/uvicorn worker)
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# 6. Запуск: запускаем entrypoint, который применит alembic миграции и затем стартует uvicorn
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
